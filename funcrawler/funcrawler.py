@@ -5,15 +5,13 @@ from dataaccess import dataaccess
 #ERASE_LINE = '\x1b[2K'
 
 def init():
-    #make this return list of PostData
+   
     spider = gagspyder()
-    posts = spider.crawl(2)
-    #save post data
-    #try:
+    posts = spider.crawl(90,15000)
+   
     print('Writing to database...')
-    dataaccess().insert_posts(posts)
+    total_inputs = dataaccess().insert_posts(posts)
     print('Done!')
-    #except: 
-    #    raise
-        #print('There was an error when writing to database')
+    print('Total number of inserted rows: ' + str(total_inputs))
+
 init()

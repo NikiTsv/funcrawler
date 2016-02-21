@@ -12,11 +12,10 @@ class dataaccess(object):
         today = datetime.now().date()
 
         add_post = self.__get_add_post_query()
-        # Insert new
+      
         cursor.execute(add_post, (data.title, data.content, data.contentType, data.contentUrl, data.points, today))
         emp_no = cursor.lastrowid
 
-        # Make sure data is committed to the database
         cnx.commit()
         cursor.close()
         cnx.close()
@@ -26,17 +25,22 @@ class dataaccess(object):
         cursor = cnx.cursor()
         today = datetime.now()
         add_post_query = self.__get_add_post_query()
-
+        successful_writes = 0
         for data in post_data:
-            # Insert new
+           try:
             cursor.execute(add_post_query, (data.title, data.content, data.contentType, data.contentUrl, data.points, today))
-            #emp_no = cursor.lastrowid  #scope_identity
-       
-        # Make sure data is committed to the database
-        cnx.commit()
-        cursor.close()
-        cnx.close()            
-
+            successful_writes = successful_writes + 1
+           except Exception as ex:
+                print('An exception occured when writing to database! ' + ex)
+        try:
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+        except Exception as ex:
+            print('An exception occured when commiting transaction! ' + ex) 
+            cnx.close()
+            raise           
+        return successful_writes
     def __get_connection(self):
         return mysql.connector.connect(user='root',password='', host='127.0.0.1', database='fourlols')
     
