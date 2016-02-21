@@ -1,7 +1,7 @@
 import datetime
 from datetime import datetime
 
-class PostData(object):
+class PostModel(object):
     '''post'''
     title = ''
     content =''
