@@ -17,8 +17,8 @@ class GagSpyder(object):
         for i in range(0, numberOfscrolls):
              print('Scrolling down...')
              driver.execute_script(SpyderWeb.get_scroll_down_js())
-             time.sleep(2)
-             #HANDLE LOAD MORE BUTTON
+             time.sleep(1)
+             #TODO: HANDLE LOAD MORE BUTTON
 
         print('Scraping data...')
        
@@ -43,7 +43,6 @@ class GagSpyder(object):
                 if upvotes is not None:
                    likes = int(upvotes.text.replace(",",""))
                    if likes > minimumUpvotes:
-                      #sometimes it's video so handle this case
                       title = soup.find("h2", {'class':'badge-item-title'})
                       content = Content()
                       content = self.__get_image_or_video(soup)
@@ -62,53 +61,6 @@ class GagSpyder(object):
         driver.set_window_size(1120, 550)
        
         return driver
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        '''example shit'''
-        #driver.find_element_by_id('search_form_input_homepage').send_keys("realpython")
-        #driver.find_element_by_id("search_button_homepage").click()
-
-        '''example shit'''
-        #url = "http://9gag.com/"
-        #source_code = requests.get(url)
-        #plain_text = source_code.text
-        #soup = BeautifulSoup(plain_text)
-        #articles = soup.findAll('article',{'class':'badge-entry-container'})
-        #for  article in articles:
-        #    img = article.findChildren('img',{'class': 'badge-item-img'})
-        #    imgLink = img[0].get('src')
-        #    print(imgLink)
-            
-
-        #for article in soup.findAll('article', {'class': 'badge-entry-container'}):
-        #    mainDiv =  article.find('div', {'class': 'badge-post-container'})
-        #    image = mainDiv.findAll()
-        #    picUrl = image.get('href')
-        #    print(picUrl)
 
     def __get_image_or_video(self, soup):
         content = Content()
@@ -136,3 +88,30 @@ class SpyderWeb(object):
 
 
     #<a class="btn badge-load-more-post blue" href="/?id=a8MqP6p%2Cayd239y%2CaA102Vg&amp;c=300" data-loading-text="Loading more posts..." data-load-count-max="30">I want more fun</a>
+
+
+
+
+
+
+        '''example shit'''
+        #driver.find_element_by_id('search_form_input_homepage').send_keys("realpython")
+        #driver.find_element_by_id("search_button_homepage").click()
+
+        '''example shit'''
+        #url = "http://9gag.com/"
+        #source_code = requests.get(url)
+        #plain_text = source_code.text
+        #soup = BeautifulSoup(plain_text)
+        #articles = soup.findAll('article',{'class':'badge-entry-container'})
+        #for  article in articles:
+        #    img = article.findChildren('img',{'class': 'badge-item-img'})
+        #    imgLink = img[0].get('src')
+        #    print(imgLink)
+
+
+        #for article in soup.findAll('article', {'class': 'badge-entry-container'}):
+        #    mainDiv =  article.find('div', {'class': 'badge-post-container'})
+        #    image = mainDiv.findAll()
+        #    picUrl = image.get('href')
+        #    print(picUrl)
