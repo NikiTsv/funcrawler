@@ -64,19 +64,18 @@ class GagSpyder(object):
 
     def __get_image_or_video(self, soup):
         content = Content()
-        image = soup.find("img", {'class':'badge-item-img'})
-        if image is not None:
-            content.type = 'image'
-            content.src = image.get('src')
+        video = soup.find("source")
+        if video is not None:
+            content.type = 'video/mp4'
+            content.src = video.get('src')
             return content
         else:
-            video = soup.find("div", {'class':'badge-animated-container-animated'})
-            if video is not None:
-                content.type = 'video/mp4'
-                content.src = video.get('data-mp4')
+             image = soup.find("img", {'class':'badge-item-img'})
+             if image is not None:
+                content.type = 'image'
+                content.src = image.get('src')
                 return content
-            else:
-                return None
+             else: return None
 
 
 
