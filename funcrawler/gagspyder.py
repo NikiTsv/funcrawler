@@ -6,14 +6,20 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from models.postmodel import PostModel
 from models.content import Content
 import time
+from selenium.webdriver.common.by import By
 
 class GagSpyder(object):
+
     """9gag crawler"""
     def crawl(self, numberOfscrolls, minimumUpvotes):
         print('Initializing...')                             
         driver = self.__get_configured_driver()
+
         print('Opening website...')
         driver.get("http://9gag.com/")
+        print('Loggin in...')
+        self.__login(driver,'n1gh7b1rd','kodkod')
+
         for i in range(0, numberOfscrolls):
              print('Scrolling down...')
              driver.execute_script(SpyderWeb.get_scroll_down_js())
@@ -77,13 +83,23 @@ class GagSpyder(object):
                 return content
              else: return None
 
+    def __login(self, driver, username, password):
+        driver.find_elements_by_class_name("badge-login-button")[0].click()
+        driver.save_screenshot('login-click1.png')
+        time.sleep(0.5)
+        driver.find_element_by_id("jsid-login-email-name").send_keys(username)
+        driver.find_element_by_id("login-email-password").send_keys(password)
+        qq = driver.find_element_by_xpath("//form[@id='login-email']/div[3]/input")
+        qq.click()
+        time.sleep(0.5)
+        driver.save_screenshot('login-click2.png')
 
 
 class SpyderWeb(object):
 
-    @staticmethod
-    def get_scroll_down_js():
-        return "window.scrollTo(0, document.body.scrollHeight);"
+        @staticmethod
+        def get_scroll_down_js():
+            return "window.scrollTo(0, document.body.scrollHeight);"
 
 
     #<a class="btn badge-load-more-post blue" href="/?id=a8MqP6p%2Cayd239y%2CaA102Vg&amp;c=300" data-loading-text="Loading more posts..." data-load-count-max="30">I want more fun</a>
