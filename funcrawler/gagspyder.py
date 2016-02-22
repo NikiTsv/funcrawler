@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 class GagSpyder(object):
 
     """9gag crawler"""
-    def crawl(self, numberOfscrolls, minimumUpvotes):
+    def crawl(self, numberOfscrolls, minimumUpvotes, minimumComments):
         print('Initializing...')                             
         driver = self.__get_configured_driver()
 
@@ -29,14 +29,14 @@ class GagSpyder(object):
         print('Scraping data...')
        
         elements = driver.find_elements_by_class_name("badge-entry-container") #find articles (posts)
-        scraped_data = self.__scrape_articles(elements, minimumUpvotes)
+        scraped_data = self.__scrape_articles(elements, minimumUpvotes, minimumComments)
            
         print('Finished scraping...') 
 
         driver.quit()
         return scraped_data
     
-    def __scrape_articles(self,articles,minimumUpvotes):
+    def __scrape_articles(self,articles,minimumUpvotes, minimumComments):
        
         results = []
         
@@ -45,10 +45,12 @@ class GagSpyder(object):
             html = ele.get_attribute('innerHTML')
             soup = BeautifulSoup(html, "html.parser") 
             try:
-                upvotes = soup.find("span",{'class':'badge-item-love-count'})            
+                upvotes = soup.find("span",{'class':'badge-item-love-count'})
+                comments = soup.find("a",{'class':'comment'})
                 if upvotes is not None:
                    likes = int(upvotes.text.replace(",",""))
-                   if likes > minimumUpvotes:
+                   if likes > minimumUpvotes or \
+                           (comments is not None and int(comments.text.replace(" comments", "")) > minimumComments):
                       title = soup.find("h2", {'class':'badge-item-title'})
                       content = Content()
                       content = self.__get_image_or_video(soup)

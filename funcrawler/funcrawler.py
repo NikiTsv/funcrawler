@@ -9,7 +9,7 @@ from gagspyder import GagSpyder
 def init():
    
     spider = GagSpyder()
-    posts = spider.crawl(10,8000)
+    posts = spider.crawl(10,8000,500)
    
     print('Writing to database...')
     total_inputs = Posts().insert_posts(posts)
