@@ -1,42 +1,42 @@
-import requests
+from spyders.spyder import Spyder
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from models.postmodel import PostModel
 from models.content import Content
 import time
-from selenium.webdriver.common.by import By
 
-class GagSpyder(object):
+class GagSpyder(Spyder):
 
-    """9gag crawler"""
+    name = 'GagSpyder'
+    website = "http://9gag.com"
+    username = 'n1gh7b1rd'
+    password = 'kodkod'
+
     def crawl(self, numberOfscrolls, minimumUpvotes, minimumComments):
-        print('Initializing...')                             
-        driver = self.__get_configured_driver()
+        print(self.name + " " + self.spyder_reports.initializing())
+        driver = self.get_configured_driver()
 
-        print('Opening website...')
-        driver.get("http://9gag.com/")
-        print('Loggin in...')
-        self.__login(driver,'n1gh7b1rd','kodkod')
+        print(self.spyder_reports.opening_website())
+        driver.get(self.website)
+        print(self.spyder_reports.logging_in())
+        self.__login(driver, self.username, self.password)
 
         for i in range(0, numberOfscrolls):
-             print('Scrolling down...')
-             driver.execute_script(SpyderWeb.get_scroll_down_js())
+             print(self.spyder_reports.scrolling_down())
+             driver.execute_script(self.spyder_web.get_scroll_down_js())
              time.sleep(1)
-             #TODO: HANDLE LOAD MORE BUTTON
+             #TODO: HANDLE LOAD MORE BUTTON?
 
-        print('Scraping data...')
+        print(self.spyder_reports.scraping_data())
        
-        elements = driver.find_elements_by_class_name("badge-entry-container") #find articles (posts)
-        scraped_data = self.__scrape_articles(elements, minimumUpvotes, minimumComments)
+        posts = driver.find_elements_by_class_name("badge-entry-container")
+        scraped_data = self.__scrape(posts, minimumUpvotes, minimumComments)
            
-        print('Finished scraping...') 
+        print(self.spyder_reports.finished_scraping())
 
         driver.quit()
         return scraped_data
     
-    def __scrape_articles(self,articles,minimumUpvotes, minimumComments):
+    def __scrape(self,articles,minimumUpvotes, minimumComments):
        
         results = []
         
@@ -61,14 +61,6 @@ class GagSpyder(object):
             except Exception as ex:
                    print('Exception has occured when scraping data! ' + str(ex))
         return results
-       
-    def __get_configured_driver(self):
-        dcap = dict(DesiredCapabilities.PHANTOMJS)
-        dcap["phantomjs.page.settings.userAgent"] = ("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36")
-        driver = webdriver.PhantomJS(desired_capabilities=dcap)
-        driver.set_window_size(1120, 550)
-       
-        return driver
 
     def __get_image_or_video(self, soup):
         content = Content()
@@ -97,11 +89,6 @@ class GagSpyder(object):
         driver.save_screenshot('login-click2.png')
 
 
-class SpyderWeb(object):
-
-        @staticmethod
-        def get_scroll_down_js():
-            return "window.scrollTo(0, document.body.scrollHeight);"
 
 
     #<a class="btn badge-load-more-post blue" href="/?id=a8MqP6p%2Cayd239y%2CaA102Vg&amp;c=300" data-loading-text="Loading more posts..." data-load-count-max="30">I want more fun</a>
