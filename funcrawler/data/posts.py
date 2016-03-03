@@ -44,4 +44,3 @@ class Posts(DataAccess):
 
     def __get_check_if_post_exists_query(self):
         return ("SELECT COUNT(Id) FROM post WHERE contentUrl = %(contentUrl)s")
-
