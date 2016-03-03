@@ -1,5 +1,5 @@
 from datetime import datetime
-from data import errors
+from data import log
 
 class logger(object):
     def __init__(self):
