@@ -15,7 +15,7 @@ class SpyderReports(object):
 
     @staticmethod
     def opening_website():
-        return "'Opening website...'"
+        return "Opening website..."
 
     @staticmethod
     def logging_in():
@@ -23,11 +23,14 @@ class SpyderReports(object):
 
     @staticmethod
     def scrolling_down():
-        return "'Scrolling down...'"
+        return "Scrolling down..."
 
     @staticmethod
     def scraping_data():
-        return "'Scraping data...'"
+        return "Scraping data..."
+    @staticmethod
+    def crawling_next():
+        return "Crawling next page..."
 
     @staticmethod
     def finished_scraping():

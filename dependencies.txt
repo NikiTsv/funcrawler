@@ -1,0 +1,6 @@
+Python34
+PhantomJS
+Selenium 2.5.2
+Requests 2.9.1 ?
+MySQL Connector
+BeautifulSoup4

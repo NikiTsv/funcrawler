@@ -1,9 +1,7 @@
 from spyders.spyder import Spyder
-from spyders.spyder import Spyder
 from bs4 import BeautifulSoup
 from models.postmodel import PostModel
 from models.content import Content
-import time
 
 class QuickSpyder(Spyder):
 
@@ -22,12 +20,13 @@ class QuickSpyder(Spyder):
         for i in range(1, numberOfPages):
             driver.get(self.website + "page/" + str(i) + "/")
             posts = driver.find_elements_by_class_name("post")
-            scrapes.extend(self.__scrape(posts, minimumUpvotes))
+            scrapes.extend(self.__scrape(posts, minimumUpvotes, __blank))
+            print(self.spyder_reports.crawling_next())
         return scrapes
 
 
 
-    def __scrape(self, posts, minimumUpvotes):
+    def __scrape(self, posts, minimumUpvotes, __blank):
         results = []
         for ele in posts:
             html = ele.get_attribute('innerHTML')
@@ -57,7 +56,7 @@ class QuickSpyder(Spyder):
         if item is not None:
             src = item.get('src')
             content.src = src
-            if(src.endswith(".gif")):
+            if src.endswith(".gif"):
                 content.type = "gif"
             else:
                 content.type = "image"
