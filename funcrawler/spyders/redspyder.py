@@ -23,16 +23,17 @@ class RedSpyder(Spyder):
             posts = driver.find_elements_by_css_selector('.thing')
             scrapes.extend(self.__scrape(posts, minimumUpvotes))
             nextLink = driver.find_elements_by_xpath("//span[contains(@class, 'nextprev')]/a")
-            if len(nextLink) == 1:
-               nextLink[0].send_keys(Keys.ENTER)
-            else:
-               nextLink[1].send_keys(Keys.ENTER)
-
-            time.sleep(1)
-            driver.save_screenshot('reddit-nextpage_' + str(i) + '.png')
-
-
-
+            #driver.save_screenshot('reddit-nextpage_' + str(i) + '.png')
+            try:
+                if len(nextLink) == 1:
+                   nextLink[0].send_keys(Keys.ENTER)
+                else:
+                   nextLink[1].send_keys(Keys.ENTER)
+                time.sleep(1.5)
+                print(self.spyder_reports.crawling_next())
+            except IndexError:
+                print(self.spyder_reports.end_reach())
+                break
 
         driver.quit()
         return scrapes

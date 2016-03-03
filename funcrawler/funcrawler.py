@@ -12,15 +12,15 @@ def spyder_nest_init():
     spyders = []
     spyders = get_spyders()
 
-    # i=1
-    # for spyder in spyders:
-    #     print(str(i) + ": " + spyder.name)
-    #     i = i+1
-    #
-    # chosen_spyder = input("Select spyder:")
-    chosen_spyder = 3
+    i=1
+    for spyder in spyders:
+        print(str(i) + ": " + spyder.name)
+        i = i+1
+
+    chosen_spyder = input("Select spyder:")
+
     spyder = spyders[int(chosen_spyder)-1]
-    posts = spyder.crawl(10,2000,500)
+    posts = spyder.crawl(99,2000,500)
    
     print('Writing to database...')
     total_inputs = Posts().insert_posts(posts)

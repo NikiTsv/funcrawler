@@ -31,6 +31,9 @@ class SpyderReports(object):
     @staticmethod
     def crawling_next():
         return "Crawling next page..."
+    @staticmethod
+    def end_reach():
+        return "End of web..."
 
     @staticmethod
     def finished_scraping():
