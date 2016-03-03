@@ -14,9 +14,6 @@ from models.logdata import LogData
 
 def spyder_nest_init(chosen_spyder, numberOfPagesOrScrolls, minimumUpvotes, minimumComments):
 
-    f = open('spyder-args-' + str(datetime.now()).replace(' ', '-').replace(':', '-').replace('.', '-'), 'w')
-    f.write(chosen_spyder + ' '+ numberOfPagesOrScrolls + ' ' + minimumUpvotes + '\n')
-    f.close()
     spyders = []
     spyders = get_spyders()
 
@@ -34,9 +31,9 @@ def spyder_nest_init(chosen_spyder, numberOfPagesOrScrolls, minimumUpvotes, mini
     total_inputs = Posts().insert_posts(posts)
     print('Done!')
     print('Total number of inserted rows: ' + str(total_inputs))
-    f = open('spyder-report-' + str(datetime.now()).replace(' ', '-').replace(':', '-').replace('.', '-'), 'w')
-    f.write('Total number of inserted rows: ' + str(total_inputs) + '\n')
-    f.close()
+    logger = Log()
+    log_data = LogData(spyder.name + " gathered " + str(total_inputs) + " contents!", "Main")
+    logger.write_notification(log_data)
 
 
 def get_spyders():
@@ -75,9 +72,10 @@ if __name__ == "__main__":
         else:
             spyder_nest_init(None, None, None, None)
     except Exception as ex:
-        error = LogData("High", str(ex), "critical", "main", datetime.now())
+        error = LogData(str(ex), "Main")
         log = Log()
         log.write_error(error)
+        raise
 
 
 #spyder_nest_init()
