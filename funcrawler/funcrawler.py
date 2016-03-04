@@ -1,4 +1,5 @@
 from data.posts import Posts
+from data.posts import PostsWp
 from data.log import Log
 from spyders.gagspyder import GagSpyder
 from spyders.quickspyder import QuickSpyder
@@ -28,7 +29,8 @@ def spyder_nest_init(chosen_spyder, numberOfPagesOrScrolls, minimumUpvotes, mini
     posts = spyder.crawl(int(numberOfPagesOrScrolls), int(minimumUpvotes), int(minimumComments))
 
     print('Writing to database...')
-    total_inputs = Posts().insert_posts(posts)
+    #total_inputs = Posts().insert_posts(posts)  #uncomment for local db
+    total_inputs = PostsWp().insert_posts(posts)  #proddb
     print('Done!')
     print('Total number of inserted rows: ' + str(total_inputs))
     logger = Log()
