@@ -68,7 +68,7 @@ class PostsWp(DataAccess):
                 successful_writes += 1
                 print('Row inserted!')
              else:
-                 print('Url already exists in the database!')
+                 print('Url ' + data.contentUrl + ' already exists in the database!')
 
            except Exception as ex:
                 print('An exception occured when writing to database! ' + str(ex))

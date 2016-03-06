@@ -4,6 +4,7 @@ from models.postmodel import PostModel
 from models.content import Content
 import time
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 class GagSpyder(Spyder):
 
@@ -26,7 +27,12 @@ class GagSpyder(Spyder):
              driver.execute_script(self.spyder_web.get_scroll_down_js(500))
              time.sleep(0.4)
              if i % 50 == 0:
-                 ActionChains(driver).move_by_offset(2, 2)
+                 #trying to prevend idle
+                 #ActionChains(driver).move_by_offset(2, 2)
+                 #ActionChains(driver).send_keys(Keys.ESCAPE)
+                 try:
+                    driver.find_element_by_class_name("badge-btn-close").send_keys(Keys.ENTER)
+                 except: pass
              if i % 500 == 0:
                  driver.save_screenshot("after_scrolls_" + str(i) + ".png")
              #TODO: HANDLE LOAD MORE BUTTON?
@@ -36,14 +42,14 @@ class GagSpyder(Spyder):
         print(self.spyder_reports.scrapable_objects_found(len(posts)))
         print(self.spyder_reports.scraping_data())
         page_source = driver.page_source
-        scraped_data = self.__scrape(page_source, minimumUpvotes, minimumComments)
+        scraped_data = self.__scrape(posts, page_source, minimumUpvotes, minimumComments)
            
         print(self.spyder_reports.finished_scraping())
 
         driver.quit()
         return scraped_data
     
-    def __scrape(self, page_source, minimumUpvotes, minimumComments):
+    def __scrape(self, posts, page_source, minimumUpvotes, minimumComments):
 
         results = []
         soup = BeautifulSoup(page_source, "html.parser")
