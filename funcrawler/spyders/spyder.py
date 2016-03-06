@@ -7,6 +7,11 @@ class SpyderWeb(object):
         def get_scroll_down_js():
             return "window.scrollTo(0, document.body.scrollHeight);"
 
+        @staticmethod
+        def get_scroll_down_js(pixels):
+            return "window.scrollTo(0, " + str(pixels) + ");"
+
+
 class SpyderReports(object):
 
     @staticmethod
@@ -24,6 +29,10 @@ class SpyderReports(object):
     @staticmethod
     def scrolling_down():
         return "Scrolling down..."
+
+    @staticmethod
+    def scrapable_objects_found(number):
+        return "Number of scrapable objects found: " + str(number) + "!"
 
     @staticmethod
     def scraping_data():
@@ -53,6 +62,11 @@ class Spyder(object):
 
     def __scrape(self):
         pass
+
+    def gather_web(self, page_source):
+        f = open("pagesource_" + self.name, "w")
+        f.write(str(page_source.encode("utf8")))
+        f.close()
 
     @staticmethod
     def get_configured_driver():

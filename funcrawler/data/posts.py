@@ -6,7 +6,7 @@ from datetime import datetime
 from models.postmodel import PostWpModel
 
 class Posts(DataAccess):
-    """description of class"""
+    """local database"""
 
     def insert_posts(self, post_data):
         cnx = self.get_connection_local()
@@ -47,6 +47,8 @@ class Posts(DataAccess):
 
 
 class PostsWp(DataAccess):
+    """production database"""
+    user_id = 7
 
     def insert_posts(self, post_data):
         cnx = self.get_connection_prod()
@@ -61,7 +63,7 @@ class PostsWp(DataAccess):
              if not result:
                 wp_post = self.__generate_wp_post(data)
                 self.__execute_insert(cursor, add_post_query, wp_post)
-                #new_post_id = cursor.lastrowid
+                self.__insert_likes(cursor, self.__get_insert_likes_query(), cursor.lastrowid, data.points)
                 #cursor.execute(self.__get_update_post_guid_query(), ({'ID': new_post_id})) -- moved in main for all
                 successful_writes += 1
                 print('Row inserted!')
@@ -95,7 +97,7 @@ class PostsWp(DataAccess):
 
     def __generate_wp_post(self, post_data):
         data = PostWpModel()
-        data.post_author = 1
+        data.post_author = self.user_id
         data.post_date = datetime.now()
         data.post_date_gmt = datetime.now()
         #converts imageUrl to html image
@@ -113,18 +115,12 @@ class PostsWp(DataAccess):
         data.post_modified_gmt = datetime.now()
         data.post_content_filtered = ""
         data.post_parent = 0 #??
-        data.guid = "http://www.4dlols.com/?p=" #insert id after =
+        data.guid = "invalid"
         data.menu_order = 1
         data.post_type = "post"
         data.post_mime_type = "" #??
-        data.comment_count = 0 #post_data.points #TODO INSER LIKES PROPERLY
+        data.comment_count = 0
         return data
-
-    def __generate_data_wp_content(self, contentUrl, contentType):
-        if contentType == "image":
-            return "<img class='size-full' " + "src='" + contentUrl + "' alt='custard' />"
-        if contentType == "video/mp4":
-            return contentUrl
 
     def __execute_insert(self, cursor, add_post_query, wp_post):
         cursor.execute(add_post_query,
@@ -133,6 +129,15 @@ class PostsWp(DataAccess):
                         wp_post.post_name, wp_post.to_ping, wp_post.pinged, wp_post.post_modified, wp_post.post_modified_gmt,
                         wp_post.post_content_filtered, wp_post.post_parent, 'invalid', wp_post.menu_order, wp_post.post_type,
                         wp_post.post_mime_type, wp_post.comment_count))
+
+    def __insert_likes(self, cursor, insert_likes_query, post_id, likes):
+        cursor.execute(insert_likes_query, (post_id, likes))
+
+    def __generate_data_wp_content(self, contentUrl, contentType):
+        if contentType == "image":
+            return "<img class='size-full' " + "src='" + contentUrl + "' alt='custard' />"
+        if contentType == "video/mp4":
+            return contentUrl
 
     def __get_add_post_query(self):
         return ("""INSERT INTO `n4dlol1_wp`.`wp_posts`
@@ -165,8 +170,6 @@ class PostsWp(DataAccess):
                      %s, %s, %s, %s
                      )
                      """)
-                    #didnt work
-                    #ON DUPLICATE KEY UPDATE guid = CONCAT('http://www.4dlols.com/?p=', CAST(VALUES(ID) as char));
 
     def __get_update_post_guid_query(self):
         return '''UPDATE wp_posts
@@ -175,4 +178,12 @@ class PostsWp(DataAccess):
 
     def __get_check_if_post_exists_query(self):
         return ("SELECT COUNT(Id) FROM wp_posts WHERE post_content LIKE %(contentUrl)s")
+
+    def __get_insert_likes_query(self):
+        return '''INSERT INTO `n4dlol1_wp`.`wp_postmeta`
+                                (`post_id`,
+                                `meta_key`,
+                                `meta_value`)
+                                VALUES
+                                (%s,'_liked', %s);'''
 

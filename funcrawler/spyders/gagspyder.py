@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from models.postmodel import PostModel
 from models.content import Content
 import time
+from selenium.webdriver import ActionChains
 
 class GagSpyder(Spyder):
 
@@ -21,37 +22,43 @@ class GagSpyder(Spyder):
         self.__login(driver, self.username, self.password)
 
         for i in range(0, numberOfscrolls):
-             print(self.spyder_reports.scrolling_down())
-             driver.execute_script(self.spyder_web.get_scroll_down_js())
-             time.sleep(1)
+             print(self.spyder_reports.scrolling_down() + str(i))
+             driver.execute_script(self.spyder_web.get_scroll_down_js(500))
+             time.sleep(0.4)
+             if i % 50 == 0:
+                 ActionChains(driver).move_by_offset(2, 2)
+             if i % 500 == 0:
+                 driver.save_screenshot("after_scrolls_" + str(i) + ".png")
              #TODO: HANDLE LOAD MORE BUTTON?
 
-        print(self.spyder_reports.scraping_data())
-       
+        driver.save_screenshot("after_scrolls" + ".png")
         posts = driver.find_elements_by_class_name("badge-entry-container")
-        scraped_data = self.__scrape(posts, minimumUpvotes, minimumComments)
+        print(self.spyder_reports.scrapable_objects_found(len(posts)))
+        print(self.spyder_reports.scraping_data())
+        page_source = driver.page_source
+        scraped_data = self.__scrape(page_source, minimumUpvotes, minimumComments)
            
         print(self.spyder_reports.finished_scraping())
 
         driver.quit()
         return scraped_data
     
-    def __scrape(self,articles,minimumUpvotes, minimumComments):
-       
+    def __scrape(self, page_source, minimumUpvotes, minimumComments):
+
         results = []
-        
-        for ele in articles:          
-            
-            html = ele.get_attribute('innerHTML')
-            soup = BeautifulSoup(html, "html.parser") 
+        soup = BeautifulSoup(page_source, "html.parser")
+        #save source
+        self.gather_web(soup.prettify())
+        articles = soup.findAll("article", "badge-entry-container")
+        for ele in articles:
             try:
-                upvotes = soup.find("span",{'class':'badge-item-love-count'})
-                comments = soup.find("a",{'class':'comment'})
+                upvotes = ele.find("span", {'class': 'badge-item-love-count'})
+                comments = ele.find("a", {'class': 'comment'})
                 if upvotes is not None:
-                   likes = int(upvotes.text.replace(",",""))
+                   likes = int(upvotes.text.replace(",", ""))
                    if likes > minimumUpvotes or \
                            (comments is not None and int(comments.text.replace(" comments", "")) > minimumComments):
-                      title = soup.find("h2", {'class':'badge-item-title'})
+                      title = soup.find("h2", {'class': 'badge-item-title'})
                       content = Content()
                       content = self.__get_image_or_video(soup)
                       if content is not None and title is not None:
@@ -80,12 +87,12 @@ class GagSpyder(Spyder):
     def __login(self, driver, username, password):
         driver.find_elements_by_class_name("badge-login-button")[0].click()
         driver.save_screenshot('login-click1.png')
-        time.sleep(0.5)
+        time.sleep(2)
         driver.find_element_by_id("jsid-login-email-name").send_keys(username)
         driver.find_element_by_id("login-email-password").send_keys(password)
         qq = driver.find_element_by_xpath("//form[@id='login-email']/div[3]/input")
         qq.click()
-        time.sleep(0.5)
+        time.sleep(2)
         driver.save_screenshot('login-click2.png')
 
 
