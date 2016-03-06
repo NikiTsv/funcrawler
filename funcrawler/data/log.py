@@ -9,7 +9,7 @@ from datetime import datetime
 class Log(DataAccess):
 
     def write_error(self, logdata):
-        cnx = self.get_connection()
+        cnx = self.get_connection_local()
         cursor = cnx.cursor()
         today = datetime.now()
         write_log_entry_query = self.__get_write_log_entry_query()
@@ -26,7 +26,7 @@ class Log(DataAccess):
             raise
 
     def write_notification(self, logdata):
-        cnx = self.get_connection()
+        cnx = self.get_connection_local()
         cursor = cnx.cursor()
         today = datetime.now()
         write_log_entry_query = self.__get_write_log_entry_query()

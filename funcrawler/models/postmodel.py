@@ -16,5 +16,35 @@ class PostModel(object):
         self.contentType = contentType
         self.contentUrl = contentUrl
         self.points = points
-        self.date_created =  datetime.now().date()
+        self.date_created = datetime.now().date()
+
+
+class PostWpModel(object):
+    '''post'''
+
+    post_author = ""
+    post_date = ""
+    post_date_gmt = datetime.now()
+    #converts imageUrl to html image
+    post_content = ""
+    post_title =""
+    post_excerpt = ""
+    ping_status = "closed"
+    post_status = "publish"
+    comment_status = "open"
+    post_password = ""
+    post_name =""
+    to_ping = ""
+    pinged = ""
+    post_modified = datetime.now()
+    post_modified_gmt = datetime.now()
+    post_content_filtered = ""
+    post_parent = 0 #??
+    guid = "http://www.4dlols.com/?p=" #insert id after =
+    menu_order = 1
+    post_type = "nav_menu_item"
+    post_mime_type = "" #??
+    comment_count = ""
+
+    #TODO INIT METHOD
 
