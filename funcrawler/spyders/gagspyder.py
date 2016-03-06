@@ -42,14 +42,14 @@ class GagSpyder(Spyder):
         print(self.spyder_reports.scrapable_objects_found(len(posts)))
         print(self.spyder_reports.scraping_data())
         page_source = driver.page_source
-        scraped_data = self.__scrape(posts, page_source, minimumUpvotes, minimumComments)
+        scraped_data = self.__scrape(page_source, minimumUpvotes, minimumComments)
            
         print(self.spyder_reports.finished_scraping())
 
         driver.quit()
         return scraped_data
     
-    def __scrape(self, posts, page_source, minimumUpvotes, minimumComments):
+    def __scrape(self, page_source, minimumUpvotes, minimumComments):
 
         results = []
         soup = BeautifulSoup(page_source, "html.parser")
@@ -64,9 +64,9 @@ class GagSpyder(Spyder):
                    likes = int(upvotes.text.replace(",", ""))
                    if likes > minimumUpvotes or \
                            (comments is not None and int(comments.text.replace(" comments", "")) > minimumComments):
-                      title = soup.find("h2", {'class': 'badge-item-title'})
+                      title = ele.find("h2", {'class': 'badge-item-title'})
                       content = Content()
-                      content = self.__get_image_or_video(soup)
+                      content = self.__get_image_or_video(ele)
                       if content is not None and title is not None:
                         src = content.src
                         post = PostModel(title.text, src, content.type, src, likes)
@@ -75,15 +75,15 @@ class GagSpyder(Spyder):
                    print('Exception has occured when scraping data! ' + str(ex))
         return results
 
-    def __get_image_or_video(self, soup):
+    def __get_image_or_video(self, ele):
         content = Content()
-        video = soup.find("source")
+        video = ele.find("source")
         if video is not None:
             content.type = 'video/mp4'
             content.src = video.get('src')
             return content
         else:
-             image = soup.find("img", {'class':'badge-item-img'})
+             image = ele.find("img", {'class': 'badge-item-img'})
              if image is not None:
                 content.type = 'image'
                 content.src = image.get('src')
