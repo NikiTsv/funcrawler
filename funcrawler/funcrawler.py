@@ -31,6 +31,7 @@ def spyder_nest_init(chosen_spyder, numberOfPagesOrScrolls, minimumUpvotes, mini
     print('Writing to database...')
     #total_inputs = Posts().insert_posts(posts)  #uncomment for local db
     total_inputs = PostsWp().insert_posts(posts)  #proddb
+    PostsWp().update_posts_guid()
     print('Done!')
     print('Total number of inserted rows: ' + str(total_inputs))
     logger = Log()

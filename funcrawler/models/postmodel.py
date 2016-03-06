@@ -22,6 +22,7 @@ class PostModel(object):
 class PostWpModel(object):
     '''post'''
 
+    #might be overridden in dataaccess generate wpmodel method
     post_author = ""
     post_date = ""
     post_date_gmt = datetime.now()
@@ -42,7 +43,7 @@ class PostWpModel(object):
     post_parent = 0 #??
     guid = "http://www.4dlols.com/?p=" #insert id after =
     menu_order = 1
-    post_type = "nav_menu_item"
+    post_type = "post"
     post_mime_type = "" #??
     comment_count = ""
 

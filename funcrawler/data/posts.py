@@ -61,8 +61,8 @@ class PostsWp(DataAccess):
              if not result:
                 wp_post = self.__generate_wp_post(data)
                 self.__execute_insert(cursor, add_post_query, wp_post)
-                new_post_id = cursor.lastrowid
-                cursor.execute(self.__get_update_post_guid_query, ({'ID': new_post_id}))
+                #new_post_id = cursor.lastrowid
+                #cursor.execute(self.__get_update_post_guid_query(), ({'ID': new_post_id})) -- moved in main for all
                 successful_writes += 1
                 print('Row inserted!')
              else:
@@ -79,6 +79,19 @@ class PostsWp(DataAccess):
             cnx.close()
             raise ex
         return successful_writes
+
+    def update_posts_guid(self):
+        cnx = self.get_connection_prod()
+        cursor = cnx.cursor()
+        cursor.execute(self.__get_update_post_guid_query())
+        try:
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+        except Exception as ex:
+            print('An exception occured when updating post guid! ' + str(ex))
+            cnx.close()
+            raise ex
 
     def __generate_wp_post(self, post_data):
         data = PostWpModel()
@@ -102,7 +115,7 @@ class PostsWp(DataAccess):
         data.post_parent = 0 #??
         data.guid = "http://www.4dlols.com/?p=" #insert id after =
         data.menu_order = 1
-        data.post_type = "nav_menu_item"
+        data.post_type = "post"
         data.post_mime_type = "" #??
         data.comment_count = 0 #post_data.points #TODO INSER LIKES PROPERLY
         return data
@@ -114,12 +127,11 @@ class PostsWp(DataAccess):
             return contentUrl
 
     def __execute_insert(self, cursor, add_post_query, wp_post):
-        #4x5+2=22
         cursor.execute(add_post_query,
                        (wp_post.post_author, wp_post.post_date, wp_post.post_date_gmt, wp_post.post_content, wp_post.post_title,
                         wp_post.post_excerpt, wp_post.post_status, wp_post.ping_status, wp_post.comment_status, wp_post.post_password,
                         wp_post.post_name, wp_post.to_ping, wp_post.pinged, wp_post.post_modified, wp_post.post_modified_gmt,
-                        wp_post.post_content_filtered, wp_post.post_parent, wp_post.guid, wp_post.menu_order, wp_post.post_type,
+                        wp_post.post_content_filtered, wp_post.post_parent, 'invalid', wp_post.menu_order, wp_post.post_type,
                         wp_post.post_mime_type, wp_post.comment_count))
 
     def __get_add_post_query(self):
@@ -151,12 +163,15 @@ class PostsWp(DataAccess):
                      %s, %s, %s, %s, %s, %s,
                      %s, %s, %s, %s, %s, %s,
                      %s, %s, %s, %s
-                     );""")
+                     )
+                     """)
+                    #didnt work
+                    #ON DUPLICATE KEY UPDATE guid = CONCAT('http://www.4dlols.com/?p=', CAST(VALUES(ID) as char));
 
     def __get_update_post_guid_query(self):
         return '''UPDATE wp_posts
-        SET guid =  CONCAT('http://www.4dlols.com/?p=',CAST(ID as char))
-        where ID = $(ID)s'''
+        SET guid =  CONCAT('http://www.4dlols.com/?p=', CAST(ID as char))
+        where guid like 'invalid' '''
 
     def __get_check_if_post_exists_query(self):
         return ("SELECT COUNT(Id) FROM wp_posts WHERE post_content LIKE %(contentUrl)s")
