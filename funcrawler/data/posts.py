@@ -61,6 +61,8 @@ class PostsWp(DataAccess):
              if not result:
                 wp_post = self.__generate_wp_post(data)
                 self.__execute_insert(cursor, add_post_query, wp_post)
+                new_post_id = cursor.lastrowid
+                cursor.execute(self.__get_update_post_guid_query, ({'ID': new_post_id}))
                 successful_writes += 1
                 print('Row inserted!')
              else:
@@ -150,6 +152,11 @@ class PostsWp(DataAccess):
                      %s, %s, %s, %s, %s, %s,
                      %s, %s, %s, %s
                      );""")
+
+    def __get_update_post_guid_query(self):
+        return '''UPDATE wp_posts
+        SET guid =  CONCAT('http://www.4dlols.com/?p=',CAST(ID as char))
+        where ID = $(ID)s'''
 
     def __get_check_if_post_exists_query(self):
         return ("SELECT COUNT(Id) FROM wp_posts WHERE post_content LIKE %(contentUrl)s")
