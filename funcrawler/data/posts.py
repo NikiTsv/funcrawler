@@ -108,7 +108,7 @@ class PostsWp(DataAccess):
         data.post_status = "publish"
         data.comment_status = "open"
         data.post_password = ""
-        data.post_name = post_data.title.replace(" ", "-")
+        data.post_name = self.__create_post_name(post_data.title)
         data.to_ping = ""
         data.pinged = ""
         data.post_modified = datetime.now()
@@ -121,6 +121,37 @@ class PostsWp(DataAccess):
         data.post_mime_type = "" #??
         data.comment_count = 0
         return data
+
+    def __create_post_name(self, title):
+        #TODO: replace with proper regular expression
+        return title.strip().replace(" ", "-")\
+            .replace(".", "-")\
+            .replace("*", "-")\
+            .replace(",", "-")\
+            .replace("(", "-")\
+            .replace(")", "-")\
+            .replace("!", "-")\
+            .replace("!", "-")\
+            .replace("!", "-")\
+            .replace("/", "-")\
+            .replace("?", "-")\
+            .replace("'", "-")\
+            .replace("&", "-")\
+            .replace("@", "-")\
+            .replace("#", "-")\
+            .replace("$", "-")\
+            .replace("%", "-")\
+            .replace("^", "-")\
+            .replace("|", "-")\
+            .replace(">", "-")\
+            .replace("<", "-")\
+            .replace("\\", "-")\
+            .replace("\"", "-")\
+            .replace(";", "-")\
+            .replace(":", "-")\
+            .replace("~", "-")\
+
+
 
     def __execute_insert(self, cursor, add_post_query, wp_post):
         cursor.execute(add_post_query,

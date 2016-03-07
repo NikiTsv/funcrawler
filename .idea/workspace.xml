@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="216bff39-8cf3-4eee-81b0-2121f5379337" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/funcrawler/spyders/gagspyder.py" afterPath="$PROJECT_DIR$/funcrawler/spyders/gagspyder.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/funcrawler/data/posts.py" afterPath="$PROJECT_DIR$/funcrawler/data/posts.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/funcrawler/spyders/redspyder.py" afterPath="$PROJECT_DIR$/funcrawler/spyders/redspyder.py" />
     </list>
     <ignored path="funcrawler.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,24 +25,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="posts.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="posts.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/funcrawler/data/posts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="83" selection-start-line="60" selection-start-column="83" selection-end-line="60" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.47607654">
+              <caret line="151" column="31" selection-start-line="151" selection-start-column="31" selection-end-line="151" selection-end-column="31" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
                 <element signature="e#260#1360#0" expanded="false" />
                 <element signature="e#1406#1580#0" expanded="false" />
                 <element signature="e#1638#1709#0" expanded="false" />
                 <element signature="e#3223#3589#0" expanded="false" />
-                <element signature="e#3644#4602#0" expanded="false" />
-                <element signature="e#4677#5295#0" expanded="false" />
-                <element signature="e#5379#5431#0" expanded="false" />
-                <element signature="e#5508#5694#0" expanded="false" />
-                <element signature="e#5740#6812#0" expanded="false" />
-                <element signature="e#6866#7003#0" expanded="false" />
-                <element signature="e#7191#7466#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -63,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gagspyder.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gagspyder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/funcrawler/spyders/gagspyder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2369186">
-              <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
                 <element signature="e#3827#5391#0" expanded="false" />
@@ -88,24 +83,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="content.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/funcrawler/models/content.py">
+      <file leaf-file-name="redspyder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/funcrawler/spyders/redspyder.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="redspyder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/funcrawler/spyders/redspyder.py">
+      <file leaf-file-name="quickspyder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/funcrawler/spyders/quickspyder.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="51" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="51" />
-              <folding>
-                <element signature="e#57#90#0" expanded="true" />
-              </folding>
+              <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,7 +126,6 @@
         <option value="$PROJECT_DIR$/funcrawler/models/content.py" />
         <option value="$PROJECT_DIR$/funcrawler/gagspyder.py" />
         <option value="$PROJECT_DIR$/funcrawler/spyders/quickspyder.py" />
-        <option value="$PROJECT_DIR$/funcrawler/spyders/redspyder.py" />
         <option value="$PROJECT_DIR$/funcrawler/data/errors.py" />
         <option value="$PROJECT_DIR$/funcrawler/models/errordata.py" />
         <option value="$PROJECT_DIR$/funcrawler/models/logdata.py" />
@@ -142,15 +134,16 @@
         <option value="$PROJECT_DIR$/funcrawler/funcrawler.py" />
         <option value="$PROJECT_DIR$/funcrawler/models/postmodel.py" />
         <option value="$PROJECT_DIR$/funcrawler/spyders/spyder.py" />
-        <option value="$PROJECT_DIR$/funcrawler/data/posts.py" />
         <option value="$PROJECT_DIR$/funcrawler/spyders/gagspyder.py" />
+        <option value="$PROJECT_DIR$/funcrawler/spyders/redspyder.py" />
+        <option value="$PROJECT_DIR$/funcrawler/data/posts.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="1932" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -178,6 +171,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -266,7 +260,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -462,25 +455,25 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1953125" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19519833" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21119325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2439282" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5290391" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -521,11 +514,21 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="112" />
+      <option name="time" value="113" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/redspyder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="51" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="51" />
+          <folding>
+            <element signature="e#57#90#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/funcrawler/data/posts.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -536,13 +539,6 @@
             <element signature="e#1406#1580#0" expanded="false" />
             <element signature="e#1638#1709#0" expanded="false" />
             <element signature="e#3223#3589#0" expanded="false" />
-            <element signature="e#3644#4602#0" expanded="false" />
-            <element signature="e#4677#5295#0" expanded="false" />
-            <element signature="e#5379#5431#0" expanded="false" />
-            <element signature="e#5508#5694#0" expanded="false" />
-            <element signature="e#5740#6812#0" expanded="false" />
-            <element signature="e#6866#7003#0" expanded="false" />
-            <element signature="e#7191#7466#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -559,9 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -609,13 +602,6 @@
             <element signature="e#1406#1580#0" expanded="false" />
             <element signature="e#1638#1709#0" expanded="false" />
             <element signature="e#3223#3589#0" expanded="false" />
-            <element signature="e#3644#4602#0" expanded="false" />
-            <element signature="e#4677#5295#0" expanded="false" />
-            <element signature="e#5379#5431#0" expanded="false" />
-            <element signature="e#5508#5694#0" expanded="false" />
-            <element signature="e#5740#6812#0" expanded="false" />
-            <element signature="e#6866#7003#0" expanded="false" />
-            <element signature="e#7191#7466#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -624,9 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -640,13 +623,6 @@
             <element signature="e#1406#1580#0" expanded="false" />
             <element signature="e#1638#1709#0" expanded="false" />
             <element signature="e#3223#3589#0" expanded="false" />
-            <element signature="e#3644#4602#0" expanded="false" />
-            <element signature="e#4677#5295#0" expanded="false" />
-            <element signature="e#5379#5431#0" expanded="false" />
-            <element signature="e#5508#5694#0" expanded="false" />
-            <element signature="e#5740#6812#0" expanded="false" />
-            <element signature="e#6866#7003#0" expanded="false" />
-            <element signature="e#7191#7466#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -676,13 +652,6 @@
             <element signature="e#1406#1580#0" expanded="false" />
             <element signature="e#1638#1709#0" expanded="false" />
             <element signature="e#3223#3589#0" expanded="false" />
-            <element signature="e#3644#4602#0" expanded="false" />
-            <element signature="e#4677#5295#0" expanded="false" />
-            <element signature="e#5379#5431#0" expanded="false" />
-            <element signature="e#5508#5694#0" expanded="false" />
-            <element signature="e#5740#6812#0" expanded="false" />
-            <element signature="e#6866#7003#0" expanded="false" />
-            <element signature="e#7191#7466#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -712,13 +681,6 @@
             <element signature="e#1406#1580#0" expanded="false" />
             <element signature="e#1638#1709#0" expanded="false" />
             <element signature="e#3223#3589#0" expanded="false" />
-            <element signature="e#3644#4602#0" expanded="false" />
-            <element signature="e#4677#5295#0" expanded="false" />
-            <element signature="e#5379#5431#0" expanded="false" />
-            <element signature="e#5508#5694#0" expanded="false" />
-            <element signature="e#5740#6812#0" expanded="false" />
-            <element signature="e#6866#7003#0" expanded="false" />
-            <element signature="e#7191#7466#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -755,13 +717,6 @@
             <element signature="e#1406#1580#0" expanded="false" />
             <element signature="e#1638#1709#0" expanded="false" />
             <element signature="e#3223#3589#0" expanded="false" />
-            <element signature="e#3644#4602#0" expanded="false" />
-            <element signature="e#4677#5295#0" expanded="false" />
-            <element signature="e#5379#5431#0" expanded="false" />
-            <element signature="e#5508#5694#0" expanded="false" />
-            <element signature="e#5740#6812#0" expanded="false" />
-            <element signature="e#6866#7003#0" expanded="false" />
-            <element signature="e#7191#7466#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -879,13 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/quickspyder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3697318">
-          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/funcrawler/models/logdata.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -897,9 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -907,7 +852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33205375">
           <caret line="849" column="0" selection-start-line="849" selection-start-column="0" selection-end-line="849" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -915,7 +859,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3761996">
           <caret line="576" column="0" selection-start-line="576" selection-start-column="0" selection-end-line="576" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -923,7 +866,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="478" column="0" selection-start-line="478" selection-start-column="0" selection-end-line="478" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -931,15 +873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="205" column="0" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/funcrawler/data/dataaccess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -963,7 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.03294893">
           <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,7 +903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -979,27 +910,42 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.330373">
           <caret line="1236" column="0" selection-start-line="1236" selection-start-column="0" selection-end-line="1236" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/funcrawler/data/dataaccess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43572986">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/funcrawler/data/posts.py">
+    <entry file="file://$PROJECT_DIR$/funcrawler/models/content.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26143792">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/spyder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="83" selection-start-line="60" selection-start-column="83" selection-end-line="60" selection-end-column="83" />
+          <caret line="68" column="17" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <element signature="e#260#1360#0" expanded="false" />
-            <element signature="e#1406#1580#0" expanded="false" />
-            <element signature="e#1638#1709#0" expanded="false" />
-            <element signature="e#3223#3589#0" expanded="false" />
-            <element signature="e#3644#4602#0" expanded="false" />
-            <element signature="e#4677#5295#0" expanded="false" />
-            <element signature="e#5379#5431#0" expanded="false" />
-            <element signature="e#5508#5694#0" expanded="false" />
-            <element signature="e#5740#6812#0" expanded="false" />
-            <element signature="e#6866#7003#0" expanded="false" />
-            <element signature="e#7191#7466#0" expanded="false" />
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/gagspyder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+            <element signature="e#3827#5391#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1019,41 +965,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/funcrawler/models/content.py">
+    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/redspyder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/spyder.py">
+    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/quickspyder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="17" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/redspyder.py">
+    <entry file="file://$PROJECT_DIR$/funcrawler/data/posts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="51" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.47607654">
+          <caret line="151" column="31" selection-start-line="151" selection-start-column="31" selection-end-line="151" selection-end-column="31" />
           <folding>
-            <element signature="e#57#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/funcrawler/spyders/gagspyder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2369186">
-          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-            <element signature="e#3827#5391#0" expanded="false" />
+            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#260#1360#0" expanded="false" />
+            <element signature="e#1406#1580#0" expanded="false" />
+            <element signature="e#1638#1709#0" expanded="false" />
+            <element signature="e#3223#3589#0" expanded="false" />
           </folding>
         </state>
       </provider>

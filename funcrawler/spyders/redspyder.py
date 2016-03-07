@@ -29,7 +29,7 @@ class RedSpyder(Spyder):
                    nextLink[0].send_keys(Keys.ENTER)
                 else:
                    nextLink[1].send_keys(Keys.ENTER)
-                time.sleep(1.5)
+                time.sleep(2.5)
                 print(self.spyder_reports.crawling_next())
             except IndexError:
                 print(self.spyder_reports.end_reach())
