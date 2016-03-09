@@ -124,32 +124,35 @@ class PostsWp(DataAccess):
 
     def __create_post_name(self, title):
         #TODO: replace with proper regular expression
-        return title.strip().replace(" ", "-")\
-            .replace(".", "-")\
-            .replace("*", "-")\
-            .replace(",", "-")\
-            .replace("(", "-")\
-            .replace(")", "-")\
-            .replace("!", "-")\
-            .replace("!", "-")\
-            .replace("!", "-")\
-            .replace("/", "-")\
-            .replace("?", "-")\
-            .replace("'", "-")\
-            .replace("&", "-")\
-            .replace("@", "-")\
-            .replace("#", "-")\
-            .replace("$", "-")\
-            .replace("%", "-")\
-            .replace("^", "-")\
-            .replace("|", "-")\
-            .replace(">", "-")\
-            .replace("<", "-")\
-            .replace("\\", "-")\
-            .replace("\"", "-")\
-            .replace(";", "-")\
-            .replace(":", "-")\
-            .replace("~", "-")\
+        return title.strip().replace(".", "")\
+            .replace("*", "")\
+            .replace(",", "")\
+            .replace("(", "")\
+            .replace(")", "")\
+            .replace("!", "")\
+            .replace("!", "")\
+            .replace("!", "")\
+            .replace("/", "")\
+            .replace("?", "")\
+            .replace("'", "")\
+            .replace("&", "")\
+            .replace("@", "")\
+            .replace("#", "")\
+            .replace("$", "")\
+            .replace("%", "")\
+            .replace("^", "")\
+            .replace("|", "")\
+            .replace(">", "")\
+            .replace("<", "")\
+            .replace("\\", "")\
+            .replace("\"", "")\
+            .replace(";", "")\
+            .replace(":", "")\
+            .replace("~", "")\
+            .replace("]", "")\
+            .replace("“", "")\
+            .replace("[", "")\
+            .replace(" ", "-")\
 
 
 
