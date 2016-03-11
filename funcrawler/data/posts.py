@@ -104,7 +104,7 @@ class PostsWp(DataAccess):
         data.post_content = self.__generate_data_wp_content(post_data.contentUrl, post_data.contentType)
         data.post_title = post_data.title
         data.post_excerpt = ""
-        data.ping_status = "closed"
+        data.ping_status = "open"
         data.post_status = "publish"
         data.comment_status = "open"
         data.post_password = ""
@@ -159,7 +159,7 @@ class PostsWp(DataAccess):
     def __execute_insert(self, cursor, add_post_query, wp_post):
         cursor.execute(add_post_query,
                        (wp_post.post_author, wp_post.post_date, wp_post.post_date_gmt, wp_post.post_content, wp_post.post_title,
-                        wp_post.post_excerpt, wp_post.post_status, wp_post.ping_status, wp_post.comment_status, wp_post.post_password,
+                        wp_post.post_excerpt, wp_post.post_status, wp_post.comment_status, wp_post.ping_status, wp_post.post_password,
                         wp_post.post_name, wp_post.to_ping, wp_post.pinged, wp_post.post_modified, wp_post.post_modified_gmt,
                         wp_post.post_content_filtered, wp_post.post_parent, 'invalid', wp_post.menu_order, wp_post.post_type,
                         wp_post.post_mime_type, wp_post.comment_count))
