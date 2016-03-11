@@ -38,8 +38,7 @@ class RedSpyder(Spyder):
         driver.quit()
         return scrapes
 
-
-    def __scrape(self,posts,minimumUpvotes):
+    def __scrape(self, posts, minimumUpvotes):
 
         results = []
 
@@ -60,7 +59,7 @@ class RedSpyder(Spyder):
                       content = self.__get_image_or_video(soup)
                       if content is not None and title is not None:
                         src = content.src
-                        post = PostModel(title.text, src, content.type, src, likes)
+                        post = PostModel(title.text, src, content.type, src, likes, content.thumbnail)
                         results.append(post)
             except Exception as ex:
                    print('Exception has occured when scraping data! ' + str(ex))
@@ -77,8 +76,16 @@ class RedSpyder(Spyder):
             content.src = src
             if src.endswith(".gifv"):
                 content.type = 'video/mp4'
+                thumbnail = soup.find("a", {'class': 'thumbnail'})
+                if thumbnail is not None:
+                    thumbnail = thumbnail.get('href')
+                    content.thumbnail = thumbnail
+                else:
+                    #default, TODO: get it out of here
+                    content.thumbnail = 'http://4dlols.com/wp-content/uploads/2016/03/logo_beta2_partial_text.png'
             else:
                 content.type = 'image'
+                content.thumbnail = ''
             return content
         else:
             return None

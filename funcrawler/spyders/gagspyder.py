@@ -69,7 +69,7 @@ class GagSpyder(Spyder):
                       content = self.__get_image_or_video(ele)
                       if content is not None and title is not None:
                         src = content.src
-                        post = PostModel(title.text, src, content.type, src, likes)
+                        post = PostModel(title.text, src, content.type, src, likes, content.thumbnail)
                         results.append(post)
             except Exception as ex:
                    print('Exception has occured when scraping data! ' + str(ex))
@@ -81,12 +81,19 @@ class GagSpyder(Spyder):
         if video is not None:
             content.type = 'video/mp4'
             content.src = video.get('src')
+            thumbnail = ele.find("img", {'class': 'badge-item-img'})
+            if thumbnail is not None:
+                thumbnail = thumbnail.get('src')
+                content.thumbnail = thumbnail
+            else:
+                content.thumbnail = ''
             return content
         else:
              image = ele.find("img", {'class': 'badge-item-img'})
              if image is not None:
                 content.type = 'image'
                 content.src = image.get('src')
+                content.thumbnail = ''
                 return content
              else: return None
 

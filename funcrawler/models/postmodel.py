@@ -9,14 +9,16 @@ class PostModel(object):
     contentUrl = ''
     points = 0
     date_created = datetime.now().date()
+    thumbnail = ''
     
-    def __init__(self, title, content, contentType, contentUrl, points):
+    def __init__(self, title, content, contentType, contentUrl, points, thumbnail):
         self.title = title        
         self.content = content
         self.contentType = contentType
         self.contentUrl = contentUrl
         self.points = points
         self.date_created = datetime.now().date()
+        self.thumbnail = thumbnail
 
 
 class PostWpModel(object):
@@ -46,6 +48,7 @@ class PostWpModel(object):
     post_type = "post"
     post_mime_type = "" #??
     comment_count = ""
+    thumbnail = ''
 
     #TODO INIT METHOD
 

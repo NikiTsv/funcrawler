@@ -63,7 +63,11 @@ class PostsWp(DataAccess):
              if not result:
                 wp_post = self.__generate_wp_post(data)
                 self.__execute_insert(cursor, add_post_query, wp_post)
-                self.__insert_likes(cursor, self.__get_insert_likes_query(), cursor.lastrowid, data.points)
+                new_post_id = cursor.lastrowid
+                self.__insert_likes(cursor, self.__get_insert_likes_query(), new_post_id, data.points)
+                fb_thumb_query = self.__get_insert_thumbnail_query("_yoast_wpseo_opengraph-image")
+                twit_thumb_query = self.__get_insert_thumbnail_query("_yoast_wpseo_twitter-image")
+                self.__insert_share_thumbnails(cursor, fb_thumb_query, twit_thumb_query, new_post_id, wp_post.thumbnail)
                 #cursor.execute(self.__get_update_post_guid_query(), ({'ID': new_post_id})) -- moved in main for all
                 successful_writes += 1
                 print('Row inserted!')
@@ -120,12 +124,14 @@ class PostsWp(DataAccess):
         data.post_type = "post"
         data.post_mime_type = "" #??
         data.comment_count = 0
+        data.thumbnail = post_data.thumbnail
         return data
 
     def __create_post_name(self, title):
         #TODO: replace with proper regular expression
         return title.strip().replace(".", "")\
             .replace("*", "")\
+            .replace("-", "")\
             .replace(",", "")\
             .replace("(", "")\
             .replace(")", "")\
@@ -153,8 +159,9 @@ class PostsWp(DataAccess):
             .replace("“", "")\
             .replace("[", "")\
             .replace(" ", "-")\
-
-
+            .replace("--"), "-"\
+            .replace("--"), "-"\
+            .replace("--"), "-"
 
     def __execute_insert(self, cursor, add_post_query, wp_post):
         cursor.execute(add_post_query,
@@ -162,7 +169,7 @@ class PostsWp(DataAccess):
                         wp_post.post_excerpt, wp_post.post_status, wp_post.comment_status, wp_post.ping_status, wp_post.post_password,
                         wp_post.post_name, wp_post.to_ping, wp_post.pinged, wp_post.post_modified, wp_post.post_modified_gmt,
                         wp_post.post_content_filtered, wp_post.post_parent, 'invalid', wp_post.menu_order, wp_post.post_type,
-                        wp_post.post_mime_type, wp_post.comment_count))
+                        wp_post.post_mime_type, wp_post.comment_count, wp_post.thumbnail))
 
     def __insert_likes(self, cursor, insert_likes_query, post_id, likes):
         cursor.execute(insert_likes_query, (post_id, likes))
@@ -196,12 +203,13 @@ class PostsWp(DataAccess):
                     `menu_order`,
                     `post_type`,
                     `post_mime_type`,
-                    `comment_count`)
+                    `comment_count`,
+                    `thumbnail`)
                     VALUES
                     (%s, %s, %s, %s, %s, %s,
                      %s, %s, %s, %s, %s, %s,
                      %s, %s, %s, %s, %s, %s,
-                     %s, %s, %s, %s
+                     %s, %s, %s, %s, %s
                      )
                      """)
 
@@ -220,4 +228,14 @@ class PostsWp(DataAccess):
                                 `meta_value`)
                                 VALUES
                                 (%s,'_liked', %s);'''
+
+    def __insert_share_thumbnails(self, cursor,insert_fb_thumbnail_query, insert_thumbnail_query, post_id, thumbnail_src):
+        cursor.execute(insert_fb_thumbnail_query, (post_id, thumbnail_src))
+        cursor.execute(insert_thumbnail_query, (post_id, thumbnail_src))
+
+    def __get_insert_thumbnail_query(self, meta_value):
+        return "INSERT INTO `n4dlol1_wp`.`wp_postmeta` (`post_id`, `meta_key`, `meta_value`) VALUES (%s,'" \
+               + str(meta_value) + "', %s);"
+
+
 
