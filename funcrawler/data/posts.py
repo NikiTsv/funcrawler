@@ -159,9 +159,9 @@ class PostsWp(DataAccess):
             .replace("“", "")\
             .replace("[", "")\
             .replace(" ", "-")\
-            .replace("--"), "-"\
-            .replace("--"), "-"\
-            .replace("--"), "-"
+            .replace("--", "-")\
+            .replace("--", "-")\
+            .replace("--", "-")
 
     def __execute_insert(self, cursor, add_post_query, wp_post):
         cursor.execute(add_post_query,
