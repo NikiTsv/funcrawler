@@ -82,7 +82,7 @@ class RedSpyder(Spyder):
                     content.thumbnail = thumbnail
                 else:
                     #default, TODO: get it out of here
-                    content.thumbnail = 'http://4dlols.com/wp-content/uploads/2016/03/logo_beta2_partial_text.png'
+                    content.thumbnail = self.default_thumbnail
             else:
                 content.type = 'image'
                 content.thumbnail = ''

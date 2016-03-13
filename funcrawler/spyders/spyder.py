@@ -56,6 +56,7 @@ class Spyder(object):
     password = ''
     spyder_web = SpyderWeb
     spyder_reports = SpyderReports
+    default_thumbnail = 'http://4dlols.com/wp-content/uploads/2016/03/logo_beta2_partial_text.png'
 
     def crawl(self):
         pass

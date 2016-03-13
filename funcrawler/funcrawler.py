@@ -4,6 +4,7 @@ from data.log import Log
 from spyders.gagspyder import GagSpyder
 from spyders.quickspyder import QuickSpyder
 from spyders.redspyder import RedSpyder
+from spyders.binspyder import BinSpyder
 import sys
 from datetime import datetime
 from models.logdata import LogData
@@ -26,7 +27,7 @@ def spyder_nest_init(chosen_spyder, numberOfPagesOrScrolls, minimumUpvotes, mini
         minimumComments = prompt_minimum_comments()
 
     spyder = spyders[int(chosen_spyder)-1]
-    posts = spyder.crawl(int(numberOfPagesOrScrolls), int(minimumUpvotes), int(minimumComments))
+    posts = spyder.crawl(int(numberOfPagesOrScrolls), float(minimumUpvotes), int(minimumComments))
 
     print('Writing to database...')
     #total_inputs = Posts().insert_posts(posts)  #uncomment for local db
@@ -44,6 +45,7 @@ def get_spyders():
     spyders.append(GagSpyder())
     spyders.append(QuickSpyder())
     spyders.append(RedSpyder())
+    spyders.append(BinSpyder())
     return spyders
 
 
