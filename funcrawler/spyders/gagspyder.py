@@ -12,6 +12,7 @@ class GagSpyder(Spyder):
     website = "http://9gag.com"
     username = 'n1gh7b1rd'
     password = 'kodkod'
+    initLogin = True
 
     def crawl(self, numberOfscrolls, minimumUpvotes, minimumComments):
         print(self.name + " " + self.spyder_reports.initializing())
@@ -19,8 +20,9 @@ class GagSpyder(Spyder):
 
         print(self.spyder_reports.opening_website())
         driver.get(self.website)
-        print(self.spyder_reports.logging_in())
-        self.__login(driver, self.username, self.password)
+        if self.initLogin:
+            print(self.spyder_reports.logging_in())
+            self.__login(driver, self.username, self.password)
 
         for i in range(0, numberOfscrolls):
              print(self.spyder_reports.scrolling_down() + str(i))
@@ -37,27 +39,48 @@ class GagSpyder(Spyder):
                  driver.save_screenshot("after_scrolls_" + str(i) + ".png")
              #TODO: HANDLE LOAD MORE BUTTON?
 
-        driver.save_screenshot("after_scrolls" + ".png")
+        #driver.save_screenshot("after_scrolls" + ".png")
         posts = driver.find_elements_by_class_name("badge-entry-container")
         print(self.spyder_reports.scrapable_objects_found(len(posts)))
         print(self.spyder_reports.scraping_data())
         page_source = driver.page_source
         scraped_data = self.__scrape(page_source, minimumUpvotes, minimumComments)
-           
+
+        long_posts_links = driver.find_elements_by_class_name("post-read-more")
+        scraped_data.extend(self.__crawl_long_posts(minimumUpvotes, minimumComments, long_posts_links))
+
+
         print(self.spyder_reports.finished_scraping())
 
         driver.quit()
         return scraped_data
-    
+
+    def __crawl_long_posts(self, minimumUpvotes, minimumComments, long_posts_links):
+        innerSpyder = GagSpyder()
+        innerSpyder.name = 'Child GagSpyder'
+        innerSpyder.initLogin = False
+        results = []
+        for a in long_posts_links:
+            innerSpyder.website = ''
+            href = a.get_attribute('href')
+            innerSpyder.website = href
+            results.extend(innerSpyder.crawl(1, minimumUpvotes, minimumComments))
+
+        return results
+
+
     def __scrape(self, page_source, minimumUpvotes, minimumComments):
 
         results = []
         soup = BeautifulSoup(page_source, "html.parser")
         #save source
-        self.gather_web(soup.prettify())
+        #self.gather_web(soup.prettify())
         articles = soup.findAll("article", "badge-entry-container")
         for ele in articles:
             try:
+                read_more_link = ele.find("a", {'class': 'post-read-more'})
+                if read_more_link is not None:
+                    continue
                 upvotes = ele.find("span", {'class': 'badge-item-love-count'})
                 comments = ele.find("a", {'class': 'comment'})
                 if upvotes is not None:
