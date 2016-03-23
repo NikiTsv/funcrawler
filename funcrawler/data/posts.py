@@ -116,7 +116,7 @@ class PostsWp(DataAccess):
         data.to_ping = ""
         data.pinged = ""
         data.post_modified = datetime.now()
-        data.post_modified_gmt = datetime.now()
+        data.post_modified_gmt = datetime.utcnow()
         data.post_content_filtered = ""
         data.post_parent = 0 #??
         data.guid = "invalid"

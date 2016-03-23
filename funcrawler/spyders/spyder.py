@@ -11,6 +11,9 @@ class SpyderWeb(object):
         def get_scroll_down_js(pixels):
             return "window.scrollTo(0, " + str(pixels) + ");"
 
+        @staticmethod
+        def get_click_elements_by_class(class_name):
+            return "jQuery('." + class_name + "').click();"
 
 class SpyderReports(object):
 

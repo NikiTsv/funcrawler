@@ -11,15 +11,20 @@ class RedSpyder(Spyder):
     name = 'RedSpyder'
     website = "https://www.reddit.com/domain/i.imgur.com/controversial"
 
-    def crawl(self, numberOfPages, minimumUpvotes, __blank):
+    websites = ["https://www.reddit.com/r/funny"]
+                # ,"https://www.reddit.com/domain/i.imgur.com/controversial",
+                # "https://www.reddit.com/domain/gfycat.com/"]
+
+    def __crawl(self, numberOfPages, minimumUpvotes, website):
         print(self.name + " " + self.spyder_reports.initializing())
         driver = self.get_configured_driver()
 
         print(self.spyder_reports.opening_website())
-        driver.get(self.website)
+        driver.get(website)
         print(self.spyder_reports.scraping_data())
         scrapes = []
         for i in range(0, numberOfPages):
+            self.__expand_videos(driver)
             posts = driver.find_elements_by_css_selector('.thing')
             scrapes.extend(self.__scrape(posts, minimumUpvotes))
             nextLink = driver.find_elements_by_xpath("//span[contains(@class, 'nextprev')]/a")
@@ -38,14 +43,24 @@ class RedSpyder(Spyder):
         driver.quit()
         return scrapes
 
+    #<div class="expando-button video expanded"></div> #expands video posts
+    def __expand_videos(self, driver):
+        driver.execute_script(self.spyder_web.get_click_elements_by_class('expando-button'))
+        time.sleep(2)
+        #driver.save_screenshot('reddit-expanded-videos.png')
+
+    def crawl(self, numberOfPages, minimumUpvotes, __blank):
+        scrapes = []
+        for website in self.websites:
+            scrapes.extend(self.__crawl(numberOfPages, minimumUpvotes, website))
+        return scrapes
+
     def __scrape(self, posts, minimumUpvotes):
-
         results = []
-
         for ele in posts:
-
             html = ele.get_attribute('innerHTML')
             soup = BeautifulSoup(html, "html.parser")
+            self.gather_web(soup.prettify())
             try:
                 upvotes = soup.find("div",{'class': 'score unvoted'})
                 if upvotes is not None:
@@ -72,20 +87,33 @@ class RedSpyder(Spyder):
         content = Content()
         link = soup.find("a", {'class': 'title'})
         if link is not None:
-            src = link.get('href')
-            content.src = src
-            if src.endswith(".gifv"):
+            video = soup.find("video", {'class': 'vjs-tech'})
+            if video is not None:
+                content.src = video.get('src')
                 content.type = 'video/mp4'
                 thumbnail = soup.find("a", {'class': 'thumbnail'})
                 if thumbnail is not None:
                     thumbnail = thumbnail.get('href')
                     content.thumbnail = thumbnail
                 else:
-                    #default, TODO: get it out of here
                     content.thumbnail = self.default_thumbnail
             else:
+                content.src = link.get('href')
                 content.type = 'image'
                 content.thumbnail = ''
+
+            # if src.endswith(".gifv"):
+            #     content.type = 'video/mp4'
+            #     thumbnail = soup.find("a", {'class': 'thumbnail'})
+            #     if thumbnail is not None:
+            #         thumbnail = thumbnail.get('href')
+            #         content.thumbnail = thumbnail
+            #     else:
+            #         #default, TODO: get it out of here
+            #         content.thumbnail = self.default_thumbnail
+            # else:
+            #     content.type = 'image'
+            #     content.thumbnail = ''
             return content
         else:
             return None
