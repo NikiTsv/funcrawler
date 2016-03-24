@@ -60,7 +60,7 @@ class RedSpyder(Spyder):
         for ele in posts:
             html = ele.get_attribute('innerHTML')
             soup = BeautifulSoup(html, "html.parser")
-            self.gather_web(soup.prettify())
+            #self.gather_web(soup.prettify())
             try:
                 upvotes = soup.find("div",{'class': 'score unvoted'})
                 if upvotes is not None:
@@ -84,23 +84,26 @@ class RedSpyder(Spyder):
     #normal: <a class="title may-blank " href="http://i.imgur.com/YE0RTZP.jpg" tabindex="1">What could go wrong?</a>
     #normal: <a class="title may-blank " href="http://i.imgur.com/YE0RTZP.png" tabindex="1">What could go wrong?</a>
     def __get_image_or_video(self, soup):
-        content = Content()
-        link = soup.find("a", {'class': 'title'})
-        if link is not None:
-            video = soup.find("video", {'class': 'vjs-tech'})
-            if video is not None:
-                content.src = video.get('src')
-                content.type = 'video/mp4'
-                thumbnail = soup.find("a", {'class': 'thumbnail'})
-                if thumbnail is not None:
-                    thumbnail = thumbnail.get('href')
-                    content.thumbnail = thumbnail
-                else:
-                    content.thumbnail = self.default_thumbnail
-            else:
-                content.src = link.get('href')
-                content.type = 'image'
-                content.thumbnail = ''
+
+        #TODO: implement small spyder funcionality
+
+        # content = Content()
+        # link = soup.find("a", {'class': 'title'})
+        # if link is not None:
+        #     video = soup.find("video", {'class': 'vjs-tech'})
+        #     if video is not None:
+        #         content.src = video.get('src')
+        #         content.type = 'video/mp4'
+        #         thumbnail = soup.find("a", {'class': 'thumbnail'})
+        #         if thumbnail is not None:
+        #             thumbnail = thumbnail.get('href')
+        #             content.thumbnail = thumbnail
+        #         else:
+        #             content.thumbnail = self.default_thumbnail
+        #     else:
+        #         content.src = link.get('href')
+        #         content.type = 'image'
+        #         content.thumbnail = ''
 
             # if src.endswith(".gifv"):
             #     content.type = 'video/mp4'
