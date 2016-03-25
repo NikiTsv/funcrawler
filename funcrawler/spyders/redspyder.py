@@ -1,5 +1,6 @@
 #https://www.reddit.com/domain/i.imgur.com/controversial
 from spyders.spyder import Spyder
+from spyders.smallspyder import SmallSpyder
 from bs4 import BeautifulSoup
 from models.postmodel import PostModel
 from models.content import Content
@@ -86,6 +87,21 @@ class RedSpyder(Spyder):
     def __get_image_or_video(self, soup):
 
         #TODO: implement small spyder funcionality
+        content = Content()
+        link = soup.find("a", {'class': 'title'})
+        if link is not None:
+            video = soup.find("video", {'class': 'vjs-tech'})
+            if video is not None:
+                agent = SmallSpyder(link.get('href'))
+                content = agent.crawl()
+            else:
+                content.src = link.get('href')
+                content.type = 'image'
+                content.thumbnail = ''
+
+        return content
+
+
 
         # content = Content()
         # link = soup.find("a", {'class': 'title'})

@@ -12,6 +12,7 @@ class SmallSpyder(Spyder):
     def __init__(self, website):
         self.website = website
 
+    ###returns content###
     def crawl(self):
         print(self.name + " " + self.spyder_reports.initializing())
         driver = self.get_configured_driver()
@@ -24,7 +25,6 @@ class SmallSpyder(Spyder):
         return scrapes
 
     def __scrape(self, post):
-        results = []
         html = post.get_attribute('innerHTML')
         soup = BeautifulSoup(html, "html.parser")
         try:
@@ -33,11 +33,10 @@ class SmallSpyder(Spyder):
            source = soup.find('source')
            src = source.get('src')
            content = Content('video/mp4', src, thumbnail)
-           results.append(content)
 
         except Exception as ex:
                print('Exception has occured when scraping data! ' + str(ex))
 
-        return results
+        return content
 
 
