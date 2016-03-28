@@ -116,7 +116,7 @@ class PostsWp(DataAccess):
         data.to_ping = ""
         data.pinged = ""
         data.post_modified = datetime.now()
-        data.post_modified_gmt = datetime.now()
+        data.post_modified_gmt = datetime.utcnow()
         data.post_content_filtered = ""
         data.post_parent = 0 #??
         data.guid = "invalid"
@@ -178,7 +178,8 @@ class PostsWp(DataAccess):
         if contentType == "image":
             return "<img class='size-full' " + "src='" + contentUrl + "' alt='custard' />"
         if contentType == "video/mp4":
-            return contentUrl
+            return "<div style='height: 500px'>[embed]" + contentUrl + "[/embed]</div>"
+
 
     def __get_add_post_query(self):
         return ("""INSERT INTO `n4dlol1_wp`.`wp_posts`

@@ -8,9 +8,15 @@ class SpyderWeb(object):
             return "window.scrollTo(0, document.body.scrollHeight);"
 
         @staticmethod
+        def get_find_source_get_src():
+            return "return document.body.getElementsByTagName('source')[0].getAttribute('src');"
+        @staticmethod
         def get_scroll_down_js(pixels):
             return "window.scrollTo(0, " + str(pixels) + ");"
 
+        @staticmethod
+        def get_click_elements_by_class(class_name):
+            return "jQuery('." + class_name + "').click();"
 
 class SpyderReports(object):
 
@@ -62,6 +68,9 @@ class Spyder(object):
         pass
 
     def __scrape(self):
+        pass
+
+    def crawl_content(self):
         pass
 
     def gather_web(self, page_source):
