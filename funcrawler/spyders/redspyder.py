@@ -18,9 +18,7 @@ class RedSpyder(Spyder):
                 "https://www.reddit.com/r/pics/controversial/",
                 "https://www.reddit.com/r/aww/controversial/",
                 "https://www.reddit.com/r/AdviceAnimals/controversial/",
-                "https://www.reddit.com/r/videos/controversial/",
-
-                ]
+                "https://www.reddit.com/r/videos/controversial/"]
 
     def __crawl(self, numberOfPages, minimumUpvotes, website):
         print(self.name + " " + self.spyder_reports.initializing())
