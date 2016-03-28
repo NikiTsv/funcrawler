@@ -13,24 +13,23 @@ class SmallSpyder(Spyder):
         self.website = website
 
     ###returns content###
-    def crawl(self):
+    def crawl_content(self):
         print(self.name + " " + self.spyder_reports.initializing())
         driver = self.get_configured_driver()
         print(self.spyder_reports.opening_website())
         driver.get(self.website)
         print(self.spyder_reports.scraping_data())
-        post = driver.find_element_by_tag_name('body')
-        scrapes = self.__scrape(post)
+        scrapes = self.__scrape_content(driver.page_source, driver)
         driver.quit()
         return scrapes
 
-    def __scrape(self, post):
-        html = post.get_attribute('innerHTML')
-        soup = BeautifulSoup(html, "html.parser")
+    def __scrape_content(self, source, driver):
+        soup = BeautifulSoup(source, "html.parser")
+        source = driver.execute_script("return document.body.getElementsByTagName('source');")
         try:
            video = soup.find('video')
            thumbnail = video.get('poster')
-           source = soup.find('source')
+           source = soup.findAll('source')
            src = source.get('src')
            content = Content('video/mp4', src, thumbnail)
 

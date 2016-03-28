@@ -90,10 +90,10 @@ class RedSpyder(Spyder):
         content = Content()
         link = soup.find("a", {'class': 'title'})
         if link is not None:
-            video = soup.find("video", {'class': 'vjs-tech'})
+            video = soup.find("div", {'class': 'expando-button'})  # this means it's a gif or video
             if video is not None:
                 agent = SmallSpyder(link.get('href'))
-                content = agent.crawl()
+                content = agent.crawl_content()
             else:
                 content.src = link.get('href')
                 content.type = 'image'
@@ -133,8 +133,8 @@ class RedSpyder(Spyder):
             # else:
             #     content.type = 'image'
             #     content.thumbnail = ''
-            return content
-        else:
-            return None
+            #return content
+        # else:
+        #     return None
 
 
