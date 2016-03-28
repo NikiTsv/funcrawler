@@ -1,6 +1,5 @@
 #https://www.reddit.com/domain/i.imgur.com/controversial
 from spyders.spyder import Spyder
-from spyders.smallspyder import SmallSpyder
 from bs4 import BeautifulSoup
 from models.postmodel import PostModel
 from models.content import Content
@@ -12,9 +11,16 @@ class RedSpyder(Spyder):
     name = 'RedSpyder'
     website = "https://www.reddit.com/domain/i.imgur.com/controversial"
 
-    websites = ["https://www.reddit.com/r/funny"]
-                # ,"https://www.reddit.com/domain/i.imgur.com/controversial",
-                # "https://www.reddit.com/domain/gfycat.com/"]
+    websites = ["https://www.reddit.com/r/gifs/controversial/",
+                "https://www.reddit.com/domain/gfycat.com/controversial/",
+                "https://www.reddit.com/r/funny/controversial/",
+                "https://www.reddit.com/domain/i.imgur.com/controversial",
+                "https://www.reddit.com/r/pics/controversial/",
+                "https://www.reddit.com/r/aww/controversial/",
+                "https://www.reddit.com/r/AdviceAnimals/controversial/",
+                "https://www.reddit.com/r/videos/controversial/",
+
+                ]
 
     def __crawl(self, numberOfPages, minimumUpvotes, website):
         print(self.name + " " + self.spyder_reports.initializing())
@@ -81,24 +87,19 @@ class RedSpyder(Spyder):
                    print('Exception has occured when scraping data! ' + str(ex))
         return results
 
-    #video: <a class="title may-blank " href="http://i.imgur.com/C4MLOlJ.gifv" tabindex="1">That's why you should check your webcam first</a>
-    #normal: <a class="title may-blank " href="http://i.imgur.com/YE0RTZP.jpg" tabindex="1">What could go wrong?</a>
-    #normal: <a class="title may-blank " href="http://i.imgur.com/YE0RTZP.png" tabindex="1">What could go wrong?</a>
     def __get_image_or_video(self, soup):
-
-        #TODO: implement small spyder funcionality
         content = Content()
         link = soup.find("a", {'class': 'title'})
         if link is not None:
-            video = soup.find("div", {'class': 'expando-button'})  # this means it's a gif or video
-            if video is not None:
-                agent = SmallSpyder(link.get('href'))
-                content = agent.crawl_content()
+            expand = soup.find("div", {'class': 'expando-button'})  # this means it's a gif or video
+            if expand is not None:
+               content.src = link.get('href')
+               content.type = 'video/mp4'
+               content.thumbnail = ''
             else:
                 content.src = link.get('href')
                 content.type = 'image'
                 content.thumbnail = ''
-
         return content
 
 
