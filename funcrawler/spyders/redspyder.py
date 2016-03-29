@@ -29,7 +29,7 @@ class RedSpyder(Spyder):
         print(self.spyder_reports.scraping_data())
         scrapes = []
         for i in range(0, numberOfPages):
-            self.__expand_videos(driver)
+            #self.__expand_videos(driver)
             posts = driver.find_elements_by_css_selector('.thing')
             scrapes.extend(self.__scrape(posts, minimumUpvotes))
             nextLink = driver.find_elements_by_xpath("//span[contains(@class, 'nextprev')]/a")
