@@ -176,9 +176,10 @@ class PostsWp(DataAccess):
 
     def __generate_data_wp_content(self, contentUrl, contentType):
         if contentType == "image":
-            if not contentUrl.endswith(('.jpg', '.jpeg', '.gif', '.png', '.bmp', '.tiff', '.tif', '.jpe', '.jfif')):
+            if contentUrl.strip().endswith(('.jpg', '.jpeg', '.gif', '.png', '.bmp', '.tiff', '.tif', '.jpe', '.jfif')):
+                return "<img class='size-full' " + "src='" + contentUrl + "' alt='custard' />"
+            else:
                 return "<div style='min-height: 700px;'>[embed]" + contentUrl + "[/embed]</div>"
-            return "<img class='size-full' " + "src='" + contentUrl + "' alt='custard' />"
         if contentType == "video/mp4":
             return "<div style='min-height: 500px;'>[embed]" + contentUrl + "[/embed]</div>"
 
