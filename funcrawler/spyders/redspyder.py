@@ -91,14 +91,18 @@ class RedSpyder(Spyder):
         if link is not None:
             #expand = soup.find("div", {'class': 'expando-button'})  # this means it's a gif or video
             src = link.get('href')
+            thumbnail_placeholder = soup.find("a", {'class': 'thumbnail'})
+            thumbnail_src = ''
+            if thumbnail_placeholder is not None:
+                thumbnail_src = thumbnail_placeholder.find("img").get('src')
             if not src.strip().endswith(('.jpg', '.jpeg', '.gif', '.png', '.bmp', '.tiff', '.tif', '.jpe', '.jfif')):
                 content.src = src
                 content.type = 'video/mp4'
-                content.thumbnail = ''
+                content.thumbnail = thumbnail_src
             else:
                 content.src = link.get('href')
                 content.type = 'image'
-                content.thumbnail = ''
+                content.thumbnail = thumbnail_src
         return content
 
 
